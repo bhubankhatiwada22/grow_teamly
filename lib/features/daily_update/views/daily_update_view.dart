@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:tiktaktoe/features/daily_update/model/daily_update_model.dart';
 import 'package:tiktaktoe/features/daily_update/services/daily_update_services.dart';
@@ -33,15 +35,44 @@ class _DailyUpdateViewState extends State<DailyUpdateView> {
           automaticallyImplyLeading: false,
           title: const Text("dailyUpdate"),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
         body: _isLoadaing
-            ? const CircularProgressIndicator()
+            ? Center(child: const CircularProgressIndicator())
             : ListView.separated(
-              separatorBuilder: (BuildContext context, int index)=> const Divider(),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
                 itemCount: dailyUpdates.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text(dailyUpdates[index].title??""),
-                    subtitle: Text(dailyUpdates[index].description??""),
+                    title: Text(dailyUpdates[index].title ?? ""),
+                    subtitle: Text(dailyUpdates[index].description ?? ""),
+                    trailing: dailyUpdates[index].acknowdedgedAt == null
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  log("Edit tabbed");
+                                },
+                                child: const Icon(
+                                  Icons.edit,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  log("delet tabbed");
+                                },
+                                child: const Icon(
+                                  Icons.delete,
+                                ),
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+
                   );
                 },
               ));
