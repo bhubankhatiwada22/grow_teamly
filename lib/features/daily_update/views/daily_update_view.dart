@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:tiktaktoe/App/route_app.dart';
 import 'package:tiktaktoe/features/daily_update/model/daily_update_model.dart';
 import 'package:tiktaktoe/features/daily_update/services/daily_update_services.dart';
 
@@ -36,7 +37,9 @@ class _DailyUpdateViewState extends State<DailyUpdateView> {
           title: const Text("dailyUpdate"),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.addDailyUpdateRoute);
+          },
           child: const Icon(Icons.add),
         ),
         body: _isLoadaing
@@ -72,7 +75,6 @@ class _DailyUpdateViewState extends State<DailyUpdateView> {
                             ],
                           )
                         : SizedBox(),
-
                   );
                 },
               ));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktaktoe/features/attendance/views/attendance_view.dart';
@@ -30,63 +31,76 @@ class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: Text("homepage"),
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () {
-      //           locator.get<SharedPreferences>().clear();
-      //           Navigator.pushAndRemoveUntil(
-      //               context,
-      //               MaterialPageRoute(builder: (context) => LoginPage()),
-      //               (route) => false);
-      //         },
-      //         icon: Icon(Icons.logout))
-      //   ],
-      // ),
-      body: pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          unselectedItemColor: Colors.blue,
-          selectedItemColor: Colors.red,
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.dashboard,
-              ),
-              label: "Dashboard",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.update,
-              ),
-              label: "update",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.insights,
-              ),
-              label: "insights",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.holiday_village,
-              ),
-              label: "Leaves",
-            ),
-            BottomNavigationBarItem(
+    return WillPopScope(
+      onWillPop: () async {
+        // SystemNavigator.pop();
+        if (_currentIndex == 0) {
+          SystemNavigator.pop();
+        } else {
+          setState(() {
+            _currentIndex = 0;
+          });
+        }
+        return false;
+      },
+      child: Scaffold(
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   title: Text("homepage"),
+        //   actions: [
+        //     IconButton(
+        //         onPressed: () {
+        //           locator.get<SharedPreferences>().clear();
+        //           Navigator.pushAndRemoveUntil(
+        //               context,
+        //               MaterialPageRoute(builder: (context) => LoginPage()),
+        //               (route) => false);
+        //         },
+        //         icon: Icon(Icons.logout))
+        //   ],
+        // ),
+        body: pages[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            unselectedItemColor: Colors.blue,
+            selectedItemColor: Colors.red,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.person,
+                  Icons.dashboard,
                 ),
-                label: "profile"),
-          ]),
+                label: "Dashboard",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.update,
+                ),
+                label: "update",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.insights,
+                ),
+                label: "insights",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.holiday_village,
+                ),
+                label: "Leaves",
+              ),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  label: "profile"),
+            ]),
+      ),
     );
   }
 }
