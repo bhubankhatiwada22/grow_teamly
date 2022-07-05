@@ -85,8 +85,10 @@ class _DashboardViewState extends State<DashboardView> {
         ],
       ),
       body: _isLoading
-          ? CircularProgressIndicator()
-          : Column(children: [
+          ? Center(child: CircularProgressIndicator())
+          : dashboardCard == null
+              ? const Center(child: Text("something went wrong"))
+              : Column(children: [
               Padding(
                 padding: EdgeInsets.only(left: 10),
               ),

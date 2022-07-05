@@ -34,10 +34,15 @@ class TestApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "grow teamly",
+      navigatorKey: AppSetting.navigator,
       onGenerateRoute: RouteHandeler.generateRoute,
-      initialRoute: token!=null?AppRoutes.homeRoute:AppRoutes.loginRoute,
+      initialRoute: token != null ? AppRoutes.homeRoute : AppRoutes.loginRoute,
       home: token != null ? Homepage() : LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
+}
+
+class AppSetting {
+  static GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 }

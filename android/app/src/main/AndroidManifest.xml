@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tiktaktoe">
+    <uses-permission android:name="android.permission.INTERNET" /> 
    <application
-        android:label="tiktaktoe"
+        android:label="Grow Teamly"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

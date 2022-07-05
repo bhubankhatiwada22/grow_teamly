@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktaktoe/App/route_app.dart';
 import 'package:tiktaktoe/features/daily_update/model/daily_update_model.dart';
 import 'package:tiktaktoe/features/daily_update/services/daily_update_services.dart';
+import 'package:tiktaktoe/features/daily_update/widwget/list_shimmear.dart';
 
 class DailyUpdateView extends StatefulWidget {
   const DailyUpdateView({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _DailyUpdateViewState extends State<DailyUpdateView> {
           child: const Icon(Icons.add),
         ),
         body: _isLoadaing
-            ? Center(child: const CircularProgressIndicator())
+            ? ListShimmer()
             : ListView.separated(
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),

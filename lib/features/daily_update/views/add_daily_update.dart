@@ -22,7 +22,9 @@ class _AddDailyUpdateViewState extends State<AddDailyUpdateView> {
       body: Column(children: [
         TextFormField(
           controller: _dateController,
-          decoration: InputDecoration(),
+          decoration: InputDecoration(
+          
+          ),
         ),
         SizedBox(
           height: 10,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tiktaktoe/App/route_app.dart';
 import 'package:tiktaktoe/features/profile/services/peofile_servce.dart';
+import 'package:tiktaktoe/helpers/snack.dart';
 import 'package:tiktaktoe/image_constants.dart';
 import 'package:tiktaktoe/models/dummy_page_model.dart';
 import 'package:tiktaktoe/models/profileModel.dart';
@@ -25,7 +27,7 @@ class _ProfileViewState extends State<ProfileView> {
     profileModel = await ProfileServices().fetchProfile();
 
     isLoadoing = false;
-    if(mounted)setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
@@ -49,6 +51,16 @@ class _ProfileViewState extends State<ProfileView> {
                       ImageConstants.dog,
                       height: 70,
                     )),
+                    IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Text("haha");
+                            });
+                      },
+                      icon: Icon(Icons.camera),
+                    ),
                     Text(
                       profileModel?.fullname ?? "",
                       style: TextStyle(
@@ -69,7 +81,12 @@ class _ProfileViewState extends State<ProfileView> {
                               arguments: DummyPageModel(
                                   name: "hello", address: "brt", age: 20));
                         },
-                        child: Text("Navigate"))
+                        child: Text("Navigate")),
+                    ElevatedButton(
+                        onPressed: () {
+                          AppSnackbar.showErrorToast("botton click", true);
+                        },
+                        child: const Text("Press"))
                   ],
                 ),
               ));
